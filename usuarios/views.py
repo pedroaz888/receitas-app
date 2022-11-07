@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from django.contrib import auth
+from django.contrib import auth, messages
 from receita.models import Receita
 
 
@@ -17,6 +17,7 @@ def cadastro(request):
             print('email não pode ser nulo')
             return redirect('cadastro')
         if password != password2:
+            messages.error(request, 'As senhas não correspondem')
             print('senhas não correspondem')
             return redirect('cadastro')
         if User.objects.filter(email=email).exists():
@@ -25,6 +26,7 @@ def cadastro(request):
         user = User.objects.create_user(username=nome, email=email, password=password)
         user.save()
         print('Usuário cadastrado com sucesso')
+        messages.success(request, 'Cadastrado com sucesso!')
         return redirect('login')
     else:
         return render(request, 'usuarios/cadastro.html')
@@ -63,22 +65,8 @@ def dashboard(request):
     else:
         return redirect('index')
 
-def cria_receita(request):
-    if request.method == 'POST':
-        nome_receita = request.POST['nome_receita']
-        ingredientes = request.POST['ingredientes']
-        modo_preparo = request.POST['modo_preparo']
-        tempo_preparo = request.POST['tempo_preparo']
-        rendimento = request.POST['rendimento']
-        categoria = request.POST['categoria']
-        foto_receita = request.FILES['foto_receita']
-        user = get_object_or_404(User, pk=request.user.id)
-        receita = Receita.objects.create(pessoa=user,
-        nome_receita = nome_receita, ingredientes = ingredientes,
-        modo_preparo = modo_preparo, tempo_preparo = tempo_preparo,
-        rendimento = rendimento, categoria =categoria, foto_receita = foto_receita)
-        receita.save()
 
-        return redirect('dashboard')
-    else:
-        return render(request, 'usuarios/cria_receita.html')
+
+
+
+
