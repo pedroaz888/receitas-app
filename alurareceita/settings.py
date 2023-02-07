@@ -28,10 +28,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -81,14 +82,23 @@ WSGI_APPLICATION = 'alurareceita.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'cook_app',
+#         'USER': 'postgres',
+#         'PASSWORD': 'pedroaz',
+#         'HOST': 'localhost'
+#     }
+# }
+
+
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cook_app',
-        'USER': 'postgres',
-        'PASSWORD': 'pedroaz',
-        'HOST': 'localhost'
-    }
+
+    'default':dj_database_url.parse('postgres://cook_app_user:Mpc6A3P0BMz936Ovepo9sr45vo0d7XSU@dpg-cfh45a9a6gdvgkm7kdtg-a.oregon-postgres.render.com/cook_app')
+
 }
 
 
@@ -124,9 +134,7 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'alurareceita/static')
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'alurareceita/static')]
 
 #Media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
