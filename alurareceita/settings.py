@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://']
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -92,14 +95,17 @@ WSGI_APPLICATION = 'alurareceita.wsgi.application'
 #     }
 # }
 
-
-import dj_database_url
-
 DATABASES = {
-
-    'default':dj_database_url.parse('postgres://cook_app_user:Mpc6A3P0BMz936Ovepo9sr45vo0d7XSU@dpg-cfh45a9a6gdvgkm7kdtg-a.oregon-postgres.render.com/cook_app')
-
+    'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'railway',
+            'USER': 'postgres',
+            'PASSWORD': '91ldiLOrBkNv06YLDvyz',
+            'HOST':'containers-us-west-47.railway.app',
+            'PORT':'7752',
+    }
 }
+
 
 
 # Password validation
