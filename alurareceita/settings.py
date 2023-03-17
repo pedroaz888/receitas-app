@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-CSRF_TRUSTED_ORIGINS = ['https://']
+CSRF_TRUSTED_ORIGINS = ['https://receitas-app-production.up.railway.app']
 
 
 MIDDLEWARE = [
@@ -138,13 +138,19 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'alurareceita/static')]
+STATIC_ROOT = os.path.join('static')
 
 #Media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+
+
+
 
 #Messages
 from django.contrib.messages import constants as messages
